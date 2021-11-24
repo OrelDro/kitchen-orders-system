@@ -1,0 +1,18 @@
+<div class="order-summary">
+  <span>Order Summary</span>
+  <div class="order-content">
+    <div>
+      <span>table: {{summary.table}}</span>
+    </div>
+    <div class="items">
+      <span>items:</span>
+      <span *ngFor="let item of summary.items">
+        {{item.name + '-' + (item.price | currency)}}
+      </span>
+    </div>
+    <div>
+      total payment: {{summary.total | currency}}
+    </div>
+  </div>
+  <p-button label="Confirm" (onClick)="confirmOrder()" icon="pi pi-angle-right" iconPos="right"></p-button>
+</div>

@@ -1,0 +1,12 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <span class="title">{{title}}</span>
+  </div>
+  <div class="actions">
+    <button pButton type="button" label="New Order" class="p-button-raised p-button-rounded" [routerLink]="'/order/table-select'"></button>
+    <button pButton type="button" label="Generate Report" class="p-button-raised p-button-rounded"></button>
+  </div>
+  <div class="orders">
+    <app-order-item *ngFor="let order of orders$ | async" [order]="order"></app-order-item>
+  </div>
+</div>

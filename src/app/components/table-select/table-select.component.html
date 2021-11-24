@@ -1,0 +1,5 @@
+<div class="table-select">
+  <span>please Select A Table</span>
+  <input type="text" pInputText [(ngModel)]="selectTable"/>
+  <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" [disabled]="!selectTable"></p-button>
+</div>

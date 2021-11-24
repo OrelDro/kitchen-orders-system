@@ -1,0 +1,14 @@
+<div class="menu">
+  <span class="title">Menu</span>
+  <div class="menu-content">
+    <div class="category" *ngFor="let category of menu">
+      <span>{{category.label}}</span>
+      <div class="item" *ngFor="let item of category.items">
+        <p-checkbox name="group" value="item" [value]="item" [(ngModel)]="selectedItems" [inputId]="item.name"></p-checkbox>
+        <span>{{item.name}}</span>
+        <span>{{item.price | currency}}</span>
+      </div>
+    </div>
+  </div>
+  <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" [disabled]="!selectedItems?.length"></p-button>
+</div>

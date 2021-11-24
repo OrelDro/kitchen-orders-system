@@ -1,0 +1,20 @@
+:host {
+  display: block;
+  .order-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 30px;
+    .order-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      .items {
+        display: flex;
+        flex-direction: column;
+        gap: 7px
+      }
+    }
+  }
+}

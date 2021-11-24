@@ -1,0 +1,4 @@
+<div class="order" [ngClass]="{'blue': order?.status === 0, 'red': order?.status === 1}">
+  <span class="table">{{order?.table}}</span>
+  <p-dropdown [options]="tableStatus" optionLabel="name" [autoDisplayFirst]="false" (onChange)="changeStatus($event)"></p-dropdown>
+</div>
