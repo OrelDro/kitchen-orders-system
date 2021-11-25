@@ -1,4 +1,11 @@
-<div class="order" [ngClass]="{'blue': order?.status === 0, 'red': order?.status === 1}">
-  <span class="table">{{order?.table}}</span>
-  <p-dropdown [options]="tableStatus" optionLabel="name" [autoDisplayFirst]="false" (onChange)="changeStatus($event)"></p-dropdown>
+<div class="order" [ngClass]="{'grey': order?.status === 0, 'red': order?.status === 1}"
+     [pTooltip]="'<div>\n'+
+'    <span>id: ' + order.id + '</span>\n'+
+'    <span>table: ' + order.table + '</span>\n'+
+'    <span>items: ' + order.items.length + '</span>\n'+
+'    <span>total: $' + order.total + '</span>\n'+
+'  </div>'" tooltipPosition="top" [escape]="false">
+  <span class="table">{{'Table: ' + order?.table}}</span>
+  <p-dropdown [options]="tableStatus" optionLabel="name" [autoDisplayFirst]="false" (onChange)="changeStatus($event)"
+              [disabled]="order?.status === 0 || order?.status === 1"></p-dropdown>
 </div>

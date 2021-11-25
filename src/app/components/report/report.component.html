@@ -1,0 +1,11 @@
+<div class="report">
+  <span>Total Money: {{totalRevenue | currency}}</span>
+  <div class="report-container">
+    <span>Payed Order: {{payedOrders.length}}</span>
+    <span *ngFor="let pay of payedOrders">{{'order ' + pay.id + ': table: ' + pay.table + ' total: ' + (pay.total | currency)}}</span>
+  </div>
+  <div class="report-container">
+    <span>Canceled Order: {{canceledOrders.length}}</span>
+    <span *ngFor="let cancel of canceledOrders">{{'order ' + cancel.id + ': table: ' + cancel.table + ' total: ' + (cancel.total | currency)}}</span>
+  </div>
+</div>

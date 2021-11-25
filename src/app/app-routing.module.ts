@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'order/:id',
-    pathMatch: 'prefix',
+    pathMatch: 'full',
     component: NewOrderComponent,
     children: [
       {

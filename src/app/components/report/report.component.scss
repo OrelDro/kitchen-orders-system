@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  .report {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    >:first-child {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .report-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      >:first-child {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      >:last-child {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+}

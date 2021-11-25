@@ -4,9 +4,16 @@
   </div>
   <div class="actions">
     <button pButton type="button" label="New Order" class="p-button-raised p-button-rounded" [routerLink]="'/order/table-select'"></button>
-    <button pButton type="button" label="Generate Report" class="p-button-raised p-button-rounded"></button>
+    <button pButton type="button" label="Generate Report" class="p-button-raised p-button-rounded" (click)="openReport()"></button>
   </div>
-  <div class="orders">
-    <app-order-item *ngFor="let order of orders$ | async" [order]="order"></app-order-item>
+  <div class="orders" *ngIf="(orders$ | async) as orders">
+    <ng-container *ngIf="orders.length; else noOrders">
+      <app-order-item *ngFor="let order of orders" [order]="order"></app-order-item>
+    </ng-container>
+    <ng-template #noOrders>
+      no orders to display
+    </ng-template>
   </div>
 </div>
+
+<p-toast></p-toast>

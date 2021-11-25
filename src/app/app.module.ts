@@ -18,6 +18,11 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {StoreModule} from "@ngrx/store";
 import {orderReducer} from "./store/reducers/order.reducer";
 import { OrderItemComponent } from './components/order-item/order-item.component';
+import {TooltipModule} from 'primeng/tooltip';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from "primeng/api";
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
+import { ReportComponent } from './components/report/report.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { OrderItemComponent } from './components/order-item/order-item.component
     TableSelectComponent,
     MenuComponent,
     OrderSummaryComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
@@ -39,9 +45,12 @@ import { OrderItemComponent } from './components/order-item/order-item.component
     InputTextModule,
     FormsModule,
     CheckboxModule,
-    StoreModule.forRoot({ data: orderReducer })
+    TooltipModule,
+    ToastModule,
+    DynamicDialogModule,
+    StoreModule.forRoot({data: orderReducer})
   ],
-  providers: [],
+  providers: [MessageService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,15 +1,17 @@
 :host {
+  width: 250px;
+  height: 100px;
   .order {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     padding: 10px;
     border: 2px solid #2196F3;
     border-radius: 5px;
-    background-color: grey;
-    &.blue {
-      background-color: cornflowerblue;
+    background-color: cornflowerblue;
+    &.grey {
+      background-color: grey;
     }
     &.red {
       background-color: red;

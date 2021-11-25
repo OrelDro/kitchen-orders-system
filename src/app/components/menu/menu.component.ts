@@ -1,19 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {OrderService} from "../../common/services/order.service";
+import {IOrder} from "../../common/interfaces/order.interface";
+import {selectOrder} from "../../store/selectors/order.selector";
+import {Store} from "@ngrx/store";
+import {updateWorkingOrder} from "../../store/actions/order.actions";
+import {Subscription} from "rxjs";
+import {IMenu, Item} from "../../common/interfaces/menu.interface";
+import {State} from "../../store/reducers/order.reducer";
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
-  menu: any[];
-  selectedItems: any[];
+  private subscriptions: Subscription;
+  menu: IMenu[];
+  selectedItems: Item[];
+  order: IOrder | null;
 
   constructor(private router: Router,
-              private orderService: OrderService) {
+              private store: Store<{ data: State }>) {
+    this.subscriptions = new Subscription();
     this.menu = [
       {
         label: 'Breakfast',
@@ -105,10 +114,21 @@ export class MenuComponent implements OnInit {
         ]
       }
       ];
+    this.order = null;
     this.selectedItems = [];
   }
 
   ngOnInit(): void {
+    this.subscriptions = this.store.select(selectOrder).subscribe( (order: IOrder) => {
+      if (order) {
+        this.order = order;
+        this.selectedItems = order.items;
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   calcTotal(): number {
@@ -116,10 +136,13 @@ export class MenuComponent implements OnInit {
   }
 
   nextPage(): void {
-    console.log(this.selectedItems);
-    this.orderService.activeOrder.items = this.selectedItems;
-    this.orderService.activeOrder.total = this.calcTotal();
-    this.router.navigate(['order/order-summary'])
+    const order = {
+      ...this.order,
+      items: this.selectedItems,
+      total: this.calcTotal()
+    } as IOrder;
+    this.store.dispatch(updateWorkingOrder(order));
+    this.router.navigate(['order','order-summary'], { queryParams: { id: order.id }});
   }
 
 }
